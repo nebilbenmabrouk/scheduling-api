@@ -29,6 +29,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.ow2.proactive.scheduling.api.graphql.common.Arguments.FILTER;
 import static org.ow2.proactive.scheduling.api.graphql.common.InputFields.NAME;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +41,6 @@ import java.util.stream.IntStream;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,6 +80,13 @@ public class GraphqlServiceIntegrationTest {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    static {
+        System.setProperty("proactive.home",
+                           new File(GraphqlServiceIntegrationTest.class.getClassLoader()
+                                                                       .getResource("config")
+                                                                       .getFile()).getParent());
+    }
 
     @Rollback
     @Test
